@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub File Server - <%= repoInfo.owner %>/<%= repoInfo.repo %></title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: #0d1117; color: #c9d1d9; min-height: 100vh; }
+    .header { background: #161b22; border-bottom: 1px solid #30363d; padding: 16px 24px; display: flex; align-items: center; gap: 12px; }
+    .header h1 { font-size: 20px; color: #58a6ff; }
+    .header .badge { font-size: 12px; background: #238636; color: #fff; padding: 2px 8px; border-radius: 12px; }
+    .header .repo-info { margin-left: auto; font-size: 12px; color: #8b949e; }
+    .header .repo-info a { color: #58a6ff; text-decoration: none; }
+    .container { max-width: 900px; margin: 0 auto; padding: 24px; }
+    .toolbar { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; align-items: center; }
+    .toolbar a { display: inline-block; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 500; transition: background 0.15s; }
+    .btn-upload { background: #238636; color: #fff; }
+    .btn-upload:hover { background: #2ea043; }
+    .btn-github { background: #21262d; color: #c9d1d9; border: 1px solid #30363d; }
+    .btn-github:hover { background: #30363d; }
+    .file-count { color: #8b949e; font-size: 14px; }
+    .files { list-style: none; }
+    .file-item { display: flex; align-items: center; padding: 12px 16px; border-bottom: 1px solid #21262d; transition: background 0.15s; }
+    .file-item:hover { background: #161b22; }
+    .file-icon { font-size: 20px; margin-right: 12px; flex-shrink: 0; }
+    .file-name { flex: 1; min-width: 0; }
+    .file-name a { color: #58a6ff; text-decoration: none; font-size: 14px; word-break: break-all; }
+    .file-name a:hover { text-decoration: underline; }
+    .file-meta { font-size: 12px; color: #8b949e; margin-top: 2px; }
+    .file-actions { display: flex; gap: 8px; flex-shrink: 0; }
+    .file-actions a { padding: 6px 12px; border-radius: 4px; font-size: 12px; text-decoration: none; border: 1px solid #30363d; color: #c9d1d9; }
+    .file-actions a:hover { background: #30363d; }
+    .empty { text-align: center; padding: 60px 20px; color: #8b949e; }
+    .empty .icon { font-size: 48px; margin-bottom: 16px; }
+    .error { background: #da3633; color: #fff; padding: 12px 16px; border-radius: 6px; margin-bottom: 16px; }
+    .api-hint { background: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 16px; margin-top: 32px; font-family: monospace; font-size: 13px; line-height: 1.6; }
+    .api-hint h3 { color: #8b949e; font-size: 14px; margin-bottom: 8px; }
+    .api-hint code { background: #30363d; padding: 2px 6px; border-radius: 3px; }
+    footer { text-align: center; padding: 24px; color: #484f58; font-size: 12px; }
+    footer a { color: #58a6ff; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <span>📦</span>
+    <h1>GitHub File Server</h1>
+    <span class="badge"><%= repoInfo.branch %></span>
+    <span class="repo-info">
+      <a href="https://github.com/<%= repoInfo.owner %>/<%= repoInfo.repo %>" target="_blank">
+        <%= repoInfo.owner %>/<%= repoInfo.repo %>
+      </a>
+    </span>
+  </div>
+
+  <div class="container">
+    <% if (error) { %>
+    <div class="error">⚠️ <%= error %></div>
+    <% } %>
+
+    <div class="toolbar">
+      <a href="/upload" class="btn-upload">⬆ Upload Files</a>
+      <a href="https://github.com/<%= repoInfo.owner %>/<%= repoInfo.repo %>" target="_blank" class="btn-github">View on GitHub</a>
+      <span class="file-count"><%= files.length %> file(s)</span>
+    </div>
+
+    <% if (files.length === 0) { %>
+    <div class="empty">
+      <div class="icon">📁</div>
+      <p>No files yet. Upload something!</p>
+    </div>
+    <% } else { %>
+    <ul class="files">
+      <% files.forEach(file => { %>
+      <li class="file-item">
+        <span class="file-icon"><%= file.name.match(/\.(jpg|jpeg|png|gif|svg|webp)$/i) ? '🖼' : file.name.match(/\.(mp4|webm|mov)$/i) ? '🎬' : file.name.match(/\.(mp3|wav|ogg)$/i) ? '🎵' : file.name.match(/\.(pdf)$/i) ? '📄' : file.name.match(/\.(zip|tar|gz|rar|7z)$/i) ? '📦' : file.name.match(/\.(js|ts|jsx|tsx)$/i) ? '📜' : file.name.match(/\.(html|css)$/i) ? '🌐' : file.name.match(/\.(json|yml|yaml|xml)$/i) ? '⚙️' : file.name.match(/\.(md)$/i) ? '📝' : '📄' %></span>
+        <div class="file-name">
+          <a href="/files/<%= encodeURIComponent(file.path) %>"><%= file.name %></a>
+          <div class="file-meta"><%= (file.size / 1024).toFixed(1) %> KB</div>
+        </div>
+        <div class="file-actions">
+          <a href="/files/<%= encodeURIComponent(file.path) %>">⬇</a>
+          <a href="/raw/<%= encodeURIComponent(file.path) %>">👁</a>
+        </div>
+      </li>
+      <% }) %>
+    </ul>
+    <% } %>
+
+    <div class="api-hint">
+      <h3>📡 API Usage</h3>
+      <p>Upload files via POST:</p>
+      <code>curl -F "files=@photo.jpg" <%= protocol %>://<%= host %>/upload</code>
+      <p style="margin-top: 8px;">Upload to a subdirectory:</p>
+      <code>curl -F "files=@photo.jpg" -F "dir=images" <%= protocol %>://<%= host %>/upload</code>
+    </div>
+  </div>
+
+  <footer>
+    Powered by <a href="https://github.com/<%= repoInfo.owner %>/<%= repoInfo.repo %>">GitHub File Server</a> · Storage via GitHub API
+  </footer>
+</body>
+</html>
