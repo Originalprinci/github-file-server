@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "updated": "2026-10-23",
+  "repo": "Originalprinci/github-file-server",
+  "themes": [
+    { "id": "aurora",   "name": "极光",   "author": "爪爪", "desc": "紫蓝渐变，冷色系",
+      "file": "themes/aurora.json",   "swatch": ["#5B4BC4", "#8C7CE8"] },
+    { "id": "sakura",   "name": "樱花",   "author": "爪爪", "desc": "粉樱暖调",
+      "file": "themes/sakura.json",   "swatch": ["#C2557F", "#F0A0BD"] },
+    { "id": "midnight", "name": "暗夜",   "author": "爪爪", "desc": "深蓝夜色，低亮度护眼",
+      "file": "themes/midnight.json", "swatch": ["#25406B", "#4C7BB8"] }
+  ]
+}
