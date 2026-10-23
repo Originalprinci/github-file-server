@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "id": "aurora",
+  "name": "极光",
+  "author": "爪爪",
+  "colors": {
+    "brand1": "#5B4BC4", "brand2": "#8C7CE8",
+    "page": "#FFFFFF", "text": "#303036", "muted": "#7A7A84",
+    "line": "#E2E2E8", "danger": "#B02020",
+    "btnFill": "#F8F8FB", "btnBorder": "#D6D6E2", "btnText": "#303036"
+  },
+  "buttons": {
+    "panel.0":  { "fill": "#E5484D", "text": "#FFFFFF" },
+    "panel.1":  { "fill": "#F5A524", "text": "#FFFFFF" },
+    "panel.2":  { "fill": "#5B4BC4", "text": "#FFFFFF" },
+    "panel.4":  { "fill": "#EAF2FF" },
+    "panel.5":  { "fill": "#EAF2FF" },
+    "panel.6":  { "fill": "#EAF2FF" }
+  }
+}
