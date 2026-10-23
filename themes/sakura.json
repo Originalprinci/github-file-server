@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "id": "sakura",
+  "name": "樱花",
+  "author": "爪爪",
+  "colors": {
+    "brand1": "#C2557F", "brand2": "#F0A0BD",
+    "page": "#FFF9FB", "text": "#3A2C31", "muted": "#997F88",
+    "line": "#F2E1E7", "danger": "#C2334B",
+    "btnFill": "#FDEEF3", "btnBorder": "#EFD3DD", "btnText": "#3A2C31"
+  },
+  "buttons": {
+    "panel.0": { "fill": "#C2334B", "text": "#FFFFFF" },
+    "panel.3": { "fill": "#F7D2DF" }
+  }
+}
