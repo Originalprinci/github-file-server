@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "id": "midnight",
+  "name": "暗夜",
+  "author": "爪爪",
+  "colors": {
+    "brand1": "#25406B", "brand2": "#4C7BB8",
+    "page": "#1B1F27", "text": "#E6EAF2", "muted": "#8B95A7",
+    "line": "#2E3542", "danger": "#FF7878",
+    "btnFill": "#252B36", "btnBorder": "#39414F", "btnText": "#E6EAF2"
+  },
+  "buttons": {
+    "panel.0": { "fill": "#8C2F39", "text": "#FFFFFF" },
+    "panel.2": { "fill": "#2F4A7A", "text": "#FFFFFF" }
+  }
+}
