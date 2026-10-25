@@ -7,6 +7,7 @@
     "brand1": "#C2557F", "brand2": "#F0A0BD",
     "page": "#FFF9FB", "text": "#3A2C31", "muted": "#997F88",
     "line": "#F2E1E7", "danger": "#C2334B",
+    "accentPower": "#E88BA8", "accentNet": "#8FB8E8", "accentMedia": "#9ED0A8",
     "btnFill": "#FDEEF3", "btnBorder": "#EFD3DD", "btnText": "#3A2C31"
   },
   "buttons": {
